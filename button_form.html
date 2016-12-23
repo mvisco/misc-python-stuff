@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Service Dashboard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <style type="text/css" scoped>
+            
+            .message {
+                -webkit-box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.5);
+                -moz-box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.5);
+                box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.5);
+                border: 1px inset #333333; 
+                display: none;
+                width: 500px; 
+                height: 400px;
+                padding: 10px;
+                background: #EEEEEE;
+                position:absolute;
+                top:30%;
+                left:30%;
+                overflow: auto;
+            }
+           
+            .form-group {
+                 position:relative;
+            }
+        </style>
+        <script type="text/javascript">
+            var displayedMsg;
+            
+            function showMsg(id) {
+                hideMsg();
+                nodeInfo=document.getElementById("service-" + id);
+                displayedMsg = nodeInfo;
+                displayedMsg.style.display = "block";
+            }
+            
+            function hideMsg() {
+                if (displayedMsg) {
+                    displayedMsg.style.display = "none";
+                }
+            }
+            
+            
+        </script>
+        {% load app_filters %}
+        {% load static %} 
+             
+        <svg width="100%" height = "100%" > 
+           <image xlink:href="{% static 'images/logo.jpg' %}" x="0" y="0" height="120px" width="150px"/>         
+           <text x="35%" y="80" font-family="Arial" font-size="80" fill="darkgrey" stroke="#dddddd">{{text_display}} {{name}}</text> 
+              
+        </svg>
+
+        <div class="container">
+           {% if response == "" %}
+           <form class="form" role="form"  action = "view_services">          
+             <button type="submit" class="btn btn-default">Action Completed</button>
+           </form>
+           {% else %}
+           <p> <br> {{response}} </br> </p>
+           <form class="form" role="form"  action = "view_services">          
+             <button type="submit" class="btn btn-default">Error</button>
+           </form>
+           {% endif %}
+      </div>
+        
+    </body>
+</html>
